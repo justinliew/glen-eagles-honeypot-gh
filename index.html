@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <!--
+      This is the page head - it contains info the browser uses
+      Like the title, which appears on the browser tab but not inside the page
+      Further down you'll see the content that displays in the page
+    -->
+    <title>Honeypot</title>
+
+    <!-- The website stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- The website JavaScript file -->
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <!--
+      The body includes the content you see in the page
+      Each element is defined using tags, like this <div></div>
+      The attributes like class="wrapper" let us style elements in the CSS
+    -->
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title">Captain Entry</h1>
+        <div class="controls">
+          
+          <div id="post_submit" style="display:none">            
+               Thank you for submitting
+              <button id="return" onclick="init_player_list()">Return</button>          
+
+          </div>
+          <div id="no_honeypot" style="display:none">            
+               There is no active honeypot and no results
+          </div>
+          <div id="has_honeypot" style="height:400;display:none">
+            <label for="player_list1">Player:</label>
+            <select name="player_list1" id="player_list1"></select>
+            <label for="score1">Score:</label>
+            <input type="text" id="score1" name="score1" size=2 onchange="score_change()"><br><br>
+            <label for="player_list2">Player:</label>
+            <select name="player_list2" id="player_list2"></select>
+            <label for="score2">Score:</label>
+            <input type="text" id="score2" name="score2" size=2 onchange="score_change()"><br><br>
+            <label for="player_list3">Player:</label>
+            <select name="player_list3" id="player_list3"></select>
+            <label for="score3">Score:</label>
+            <input type="text" id="score3" name="score3" size=2 onchange="score_change()"><br><br>
+            <label for="player_list4">Player:</label>
+            <select name="player_list4" id="player_list4"></select>
+            <label for="score4">Score:</label>
+            <input type="text" id="score4" name="score4" size=2 onchange="score_change()"><br><br>
+
+            
+            <button id="submit" onclick="submit()">Submit</button>          
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="links"></div>
+      <a
+        class="btn--remix"
+        target="_top"
+        href="/"
+      >
+        user
+      </a>
+    </footer>
+  </body>
+</html>

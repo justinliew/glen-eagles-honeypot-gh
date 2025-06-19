@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <!--
+      This is the page head - it contains info the browser uses
+      Like the title, which appears on the browser tab but not inside the page
+      Further down you'll see the content that displays in the page
+    -->
+    <title>Starter!</title>
+
+    <!-- The website stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- The website JavaScript file -->
+    <script src="/starter.js" defer></script>
+  </head>
+  <body>
+    <!--
+      The body includes the content you see in the page
+      Each element is defined using tags, like this <div></div>
+      The attributes like class="wrapper" let us style elements in the CSS
+    -->
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title">Starter</h1>
+        <div class="controls">
+          
+          <div id="no_honeypot" style="display:none">
+            <button id="new" onclick="new_honeypot()">New Honeypot</button>          
+          </div>          
+          <div id="show_results" style="display:none">
+            <button id="delete" onclick="delete_honeypot()">Delete Honeypot</button>          
+            <button id="refresh" onclick="init_player_list()">Back to List</button>          
+            <div class="column">
+              <table id="result_table">
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Prize</th>
+                </tr>
+              </table>
+            </div>
+          </div>          
+          <div id="has_honeypot" style="height:400;display:none" class="row">
+            <button id="add" onclick="add_player()">Add Player</button>          
+            <button id="add_all" onclick="add_all_players()">Add All Players</button>          
+            <button id="delete" onclick="delete_honeypot()">Delete Honeypot</button>          
+            <button id="refresh" onclick="init_player_list()">Refresh List</button>          
+            <button id="submit" onclick="submit_honeypot_confirm()">Submit Honeypot</button>          
+            <div class="column">
+              <table id="player_table">
+                <tr>
+                  <th>Name</th>
+                  <th>Remove Player</th>
+                  <th>Gross Score</th>
+                  <th>Net Score</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+    <dialog id="add_dialog">
+      <form method="dialog">
+        <p>
+          <label for="add_dialog">Player:</label>
+          <select id="player_select" name="player_select">
+          </select>
+        </p>
+        <div>
+          <button id="add_dialog_cancel" type="reset">Cancel</button>
+          <button id="add_dialog_submit">Confirm</button>
+        </div>
+      </form>
+    </dialog>      
+    <dialog id="delete_confirm">
+      <form method="dialog">
+        <p>
+          <label for="delete_confirm">Are you sure you want to delete the entre Honeypot?</label>
+        </p>
+        <div>
+          <button id="delete_confirm_cancel" type="reset">Cancel</button>
+          <button id="delete_confirm_submit">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="submit_confirm">
+      <form method="dialog">
+        <p>
+          <label id="submit_label" for="submit">REPLACE</label>
+        </p>
+        <div>
+          <button id="submit_confirm_cancel" type="reset">Cancel</button>
+          <button id="submit_confirm_submit">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="add_all_confirm">
+      <form method="dialog">
+        <p>
+          <label for="add_all_confirm">Doing this will clear the honeypot and add all players without scores. Are you sure?</label>
+        </p>
+        <div>
+          <button id="add_all_confirm_cancel" type="reset">Cancel</button>
+          <button id="add_all_confirm_submit">Confirm</button>
+        </div>
+      </form>
+    </dialog>      
+    <dialog id="submit_failed">
+      <form method="dialog">
+        <p>
+          <label for="submit_failed">Submitting failed; not all scores entered.</label>
+        </p>
+        <div>
+          <button id="submit_failed_ok">OK</button>
+        </div>
+      </form>
+    </dialog>
+
+    <footer class="footer">
+      <div class="links"></div>
+      <a
+        class="btn--remix"
+        target="_top"
+        href="/"
+      >
+        user
+      </a>
+      </footer>
+  </body>
+</html>

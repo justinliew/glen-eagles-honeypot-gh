@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <!--
+      This is the page head - it contains info the browser uses
+      Like the title, which appears on the browser tab but not inside the page
+      Further down you'll see the content that displays in the page
+    -->
+    <title>Admin!</title>
+
+    <!-- The website stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- The website JavaScript file -->
+    <script src="/admin.js" defer></script>
+  </head>
+  <body>
+    <!--
+      The body includes the content you see in the page
+      Each element is defined using tags, like this <div></div>
+      The attributes like class="wrapper" let us style elements in the CSS
+    -->
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title">Admin</h1>
+
+          <button id="change_starter_password" onclick="roll_starter_password()">Change Starter Password</button>          
+          <button id="change_captain_password" onclick="roll_captain_password()">Change Captain Password</button>          
+
+          <hr class="dashed">
+          <label for="player_upload">Update Player Handicaps</label>
+          <input type="file" id="player_upload" accept=".csv" name="filename" onclick="this.value=null;">
+          <hr class="dashed">
+      </div>
+    </div>
+    <dialog id="roll_starter_dialog">
+      <form method="dialog">
+        <p>
+          <label for="roll_starter_dialog">Player:</label>
+        </p>
+        <div>
+          <button id="roll_starter_cancel" type="reset">Cancel</button>
+          <button id="roll_starter_submit" type="submit">Confirm</button>
+        </div>
+      </form>
+    </dialog>      
+    <dialog id="roll_captain_dialog">
+      <form method="dialog">
+        <p>
+          <label for="delete_confirm">Are you sure you want to delete the entre Honeypot?</label>
+        </p>
+        <div>
+          <button id="delete_confirm_cancel" type="reset">Cancel</button>
+          <button id="delete_confirm_submit" type="submit">Confirm</button>
+        </div>
+      </form>
+    </dialog>      
+        <dialog id="handicap_result">
+      <form method="dialog">
+        <p>
+          <label id="handicap_result_label" for="handicap_result"></label>
+        </p>
+        <div>
+          <button id="handicap_result_ok" type="submit">Ok</button>
+        </div>
+      </form>
+    </dialog>     
+
+    <footer class="footer">
+      <div class="links"></div>
+      <a
+        class="btn--remix"
+        target="_top"
+        href="/"
+      >
+        user
+      </a>
+    </footer>
+  </body>
+</html>
