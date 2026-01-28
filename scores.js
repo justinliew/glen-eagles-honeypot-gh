@@ -42,6 +42,7 @@ function get_list_of_honeypots() {
     document.getElementById("list_scores").style.display = 'block';
     document.getElementById("show_scores").style.display = 'none';
     let table = clear_table('date_table');
+    dates.reverse();
     for (let i=0; i < dates.length;++i) {
       var row = table.insertRow(table.rows.length);
       let cell = row.insertCell(0);
