@@ -10,6 +10,19 @@ function submit_honeypot() {
       return;
     }
   }
+  
+  // Check that all KP and longest putt selections are made
+  const kpHole5High = document.getElementById('kp_hole5_high').value;
+  const kpHole5Low = document.getElementById('kp_hole5_low').value;
+  const kpHole8High = document.getElementById('kp_hole8_high').value;
+  const kpHole8Low = document.getElementById('kp_hole8_low').value;
+  const longestPutt = document.getElementById('longest_putt').value;
+  
+  if (!kpHole5High || !kpHole5Low || !kpHole8High || !kpHole8Low || !longestPutt) {
+    alert("Please select winners for all KP holes and longest putt before submitting.");
+    return;
+  }
+  
   const headers = new Headers();
   headers.append("secret",gSecret);
   headers.append("scope","starter");
@@ -28,45 +41,13 @@ function submit_honeypot() {
 
       let table = clear_table('result_table');
       for (let i=0; i < response.length;++i) {
-        let j = 0;
-        while (response[i].winners[j] != null) {
-          var row = table.insertRow(table.rows.length);
-          let namecell = row.insertCell(0);
-          namecell.innerHTML = response[i].winners[j].name;
-          let catcell = row.insertCell(1);
-          catcell.innerHTML = response[i].desc;          
-          let resultcell = row.insertCell(2);
-          resultcell.innerHTML = "$" + response[i].winners[j].amt.toFixed(2);
-          j++;
-        }
-
-        if (response[i].close5 != 0) {
-          var row = table.insertRow(table.rows.length);
-          let namecell = row.insertCell(0);
-          namecell.innerHTML = "Closest on 5";
-          let catcell = row.insertCell(1);
-          catcell.innerHTML = response[i].desc;          
-          let resultcell = row.insertCell(2);
-          resultcell.innerHTML = "$" + response[i].close5;          
-        }
-        if (response[i].close8 != 0) {
-          var row = table.insertRow(table.rows.length);
-          let namecell = row.insertCell(0);
-          namecell.innerHTML = "Closest on 8";
-          let catcell = row.insertCell(1);
-          catcell.innerHTML = response[i].desc;          
-          let resultcell = row.insertCell(2);
-          resultcell.innerHTML = "$" + response[i].close8;          
-        }
-        if (response[i].long != 0) {
-          var row = table.insertRow(table.rows.length);
-          let namecell = row.insertCell(0);
-          namecell.innerHTML = "Longest Putt";
-          let catcell = row.insertCell(1);
-          catcell.innerHTML = response[i].desc;          
-          let resultcell = row.insertCell(2);
-          resultcell.innerHTML = "$" + response[i].long;          
-        }
+        var row = table.insertRow(table.rows.length);
+        let namecell = row.insertCell(0);
+        namecell.innerHTML = response[i].name;
+        let catcell = row.insertCell(1);
+        catcell.innerHTML = response[i].cat;          
+        let resultcell = row.insertCell(2);
+        resultcell.innerHTML = "$" + response[i].amt.toFixed(2);
       }
     
   });
@@ -241,6 +222,97 @@ function init_player_list() {
       document.getElementById("has_honeypot").style.display = 'block';
       document.getElementById("show_results").style.display = 'none';
       let table = clear_table('player_table');
+      
+      // Populate KP and longest putt dropdowns
+      const kpHole5HighSelect = document.getElementById('kp_hole5_high');
+      const kpHole5LowSelect = document.getElementById('kp_hole5_low');
+      const kpHole8HighSelect = document.getElementById('kp_hole8_high');
+      const kpHole8LowSelect = document.getElementById('kp_hole8_low');
+      const longestPuttSelect = document.getElementById('longest_putt');
+      
+      // Clear existing options except the first one
+      kpHole5HighSelect.innerHTML = '<option value="">-- Select Player --</option>';
+      kpHole5LowSelect.innerHTML = '<option value="">-- Select Player --</option>';
+      kpHole8HighSelect.innerHTML = '<option value="">-- Select Player --</option>';
+      kpHole8LowSelect.innerHTML = '<option value="">-- Select Player --</option>';
+      longestPuttSelect.innerHTML = '<option value="">-- Select Player --</option>';
+      
+      // Add all players to the dropdowns
+      for (let i=0; i < players.players.length;++i) {
+        let option1 = new Option(players.players[i].name, players.players[i].name);
+        let option2 = new Option(players.players[i].name, players.players[i].name);
+        let option3 = new Option(players.players[i].name, players.players[i].name);
+        let option4 = new Option(players.players[i].name, players.players[i].name);
+        let option5 = new Option(players.players[i].name, players.players[i].name);
+        kpHole5HighSelect.add(option1);
+        kpHole5LowSelect.add(option2);
+        kpHole8HighSelect.add(option3);
+        kpHole8LowSelect.add(option4);
+        longestPuttSelect.add(option5);
+      }
+      
+      // Restore saved selections from server
+      if (players.kp_hole5_high) kpHole5HighSelect.value = players.kp_hole5_high;
+      if (players.kp_hole5_low) kpHole5LowSelect.value = players.kp_hole5_low;
+      if (players.kp_hole8_high) kpHole8HighSelect.value = players.kp_hole8_high;
+      if (players.kp_hole8_low) kpHole8LowSelect.value = players.kp_hole8_low;
+      if (players.long) longestPuttSelect.value = players.long;
+      
+      // Add event listeners to save selections to server when changed
+      kpHole5HighSelect.addEventListener('change', () => {
+        const headers = new Headers();
+        headers.append("player", kpHole5HighSelect.value);
+        headers.append("is_low", "false");
+        headers.append("secret", gSecret);
+        headers.append("scope", "starter");
+        fetch("https://honeypot.edgecompute.app/set_kp_hole5", {
+          headers: headers
+        });
+      });
+      
+      kpHole5LowSelect.addEventListener('change', () => {
+        const headers = new Headers();
+        headers.append("player", kpHole5LowSelect.value);
+        headers.append("is_low", "true");
+        headers.append("secret", gSecret);
+        headers.append("scope", "starter");
+        fetch("https://honeypot.edgecompute.app/set_kp_hole5", {
+          headers: headers
+        });
+      });
+      
+      kpHole8HighSelect.addEventListener('change', () => {
+        const headers = new Headers();
+        headers.append("player", kpHole8HighSelect.value);
+        headers.append("is_low", "false");
+        headers.append("secret", gSecret);
+        headers.append("scope", "starter");
+        fetch("https://honeypot.edgecompute.app/set_kp_hole8", {
+          headers: headers
+        });
+      });
+      
+      kpHole8LowSelect.addEventListener('change', () => {
+        const headers = new Headers();
+        headers.append("player", kpHole8LowSelect.value);
+        headers.append("is_low", "true");
+        headers.append("secret", gSecret);
+        headers.append("scope", "starter");
+        fetch("https://honeypot.edgecompute.app/set_kp_hole8", {
+          headers: headers
+        });
+      });
+      
+      longestPuttSelect.addEventListener('change', () => {
+        const headers = new Headers();
+        headers.append("player", longestPuttSelect.value);
+        headers.append("secret", gSecret);
+        headers.append("scope", "starter");
+        fetch("https://honeypot.edgecompute.app/set_longest_putt", {
+          headers: headers
+        });
+      });
+      
       for (let i=0; i < players.players.length;++i) {
         var row = table.insertRow(table.rows.length);
         let namecell = row.insertCell(0);

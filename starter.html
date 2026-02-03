@@ -55,6 +55,38 @@
             <button id="delete" onclick="delete_honeypot()">Delete Honeypot</button>          
             <button id="refresh" onclick="init_player_list()">Refresh List</button>          
             <button id="submit" onclick="submit_honeypot_confirm()">Submit Honeypot</button>          
+            <div class="kp-section" style="margin: 20px 0;">
+              <div style="margin-bottom: 10px;">
+                <label for="kp_hole5_high">KP Hole 5 - High:</label>
+                <select id="kp_hole5_high" name="kp_hole5_high">
+                  <option value="">-- Select Player --</option>
+                </select>
+                
+                <label for="kp_hole5_low" style="margin-left: 20px;">KP Hole 5 - Low:</label>
+                <select id="kp_hole5_low" name="kp_hole5_low">
+                  <option value="">-- Select Player --</option>
+                </select>
+              </div>
+              
+              <div style="margin-bottom: 10px;">
+                <label for="kp_hole8_high">KP Hole 8 - High:</label>
+                <select id="kp_hole8_high" name="kp_hole8_high">
+                  <option value="">-- Select Player --</option>
+                </select>
+                
+                <label for="kp_hole8_low" style="margin-left: 20px;">KP Hole 8 - Low:</label>
+                <select id="kp_hole8_low" name="kp_hole8_low">
+                  <option value="">-- Select Player --</option>
+                </select>
+              </div>
+              
+              <div>
+                <label for="longest_putt">Longest Putt:</label>
+                <select id="longest_putt" name="longest_putt">
+                  <option value="">-- Select Player --</option>
+                </select>
+              </div>
+            </div>
             <div class="column">
               <table id="player_table">
                 <tr>
