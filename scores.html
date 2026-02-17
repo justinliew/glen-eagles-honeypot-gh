@@ -36,11 +36,22 @@
           <div id="show_scores" style="display:none">
             <button id="refresh" onclick="get_list_of_honeypots()">Back to List</button>          
             <div class="column">
+              <h3>Scores</h3>
               <table id="result_table">
                 <tr>
                   <th>Name</th>
                   <th>Gross</th>
-                  <th>net</th>
+                  <th>Net</th>
+                </tr>
+              </table>
+            </div>
+            <div class="column" style="margin-top: 20px;">
+              <h3>Winners</h3>
+              <table id="winners_table">
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Prize</th>
                 </tr>
               </table>
             </div>

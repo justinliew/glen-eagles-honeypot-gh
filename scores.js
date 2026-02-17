@@ -34,6 +34,8 @@ function display_dates(dates) {
         headers.append("id", id);
         headers.append("secret", gSecret);
         headers.append("scope","captain");
+        
+        // Fetch scores
         fetch("https://honeypot.edgecompute.app/get_scores", {
           headers: headers
         })
@@ -42,6 +44,21 @@ function display_dates(dates) {
         })
         .then(scores => {
           insert_scores(scores);
+        });
+        
+        // Fetch winners
+        const winnersHeaders = new Headers();
+        winnersHeaders.append("id", id);
+        winnersHeaders.append("secret", gSecret);
+        winnersHeaders.append("scope","captain");
+        fetch("https://honeypot.edgecompute.app/get_winners", {
+          headers: winnersHeaders
+        })
+        .then(response => {
+          return response.json();
+        })
+        .then(winners => {
+          insert_winners(winners);
         });
       };
     })(dates[i].id);
@@ -62,7 +79,19 @@ function insert_scores(scores) {
     grosscell.innerHTML = scores.scores[i].gross;          
     let netcell = row.insertCell(2);
     netcell.innerHTML = scores.scores[i].net;          
+  }
+}
 
+function insert_winners(winners) {
+  let table = clear_table('winners_table');
+  for (let i=0; i < winners.length;++i) {
+    var row = table.insertRow(table.rows.length);
+    let namecell = row.insertCell(0);
+    namecell.innerHTML = winners[i].name;
+    let catcell = row.insertCell(1);
+    catcell.innerHTML = winners[i].cat;          
+    let prizecell = row.insertCell(2);
+    prizecell.innerHTML = "$" + winners[i].amt.toFixed(2);          
   }
 }
 
