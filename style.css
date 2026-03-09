@@ -208,3 +208,43 @@ hr.dashed {
   font-size: 16px;
   cursor: pointer;
 }
+
+/* Winnings page styles */
+.player-btn {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  padding: 0.5rem 1rem;
+}
+
+.player-btn:hover {
+  background-color: #D0FFF1;
+}
+
+#winnings_table,
+#history_table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#winnings_table th,
+#winnings_table td,
+#history_table th,
+#history_table td {
+  border: 1px solid #000;
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+#winnings_table th,
+#history_table th {
+  background-color: var(--color-primary);
+}
+
+#player_name {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}

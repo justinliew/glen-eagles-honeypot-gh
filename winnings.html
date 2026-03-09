@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <title>Winnings</title>
+
+    <!-- The website stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- The website JavaScript file -->
+    <script src="winnings.js" defer></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1 class="title">Winnings</h1>
+        <div class="controls">
+          
+          <!-- Player detail view - shows individual player's winning history -->
+          <div id="player_detail" style="display:none">
+            <button id="back_btn" onclick="showPlayerList()">Back to List</button>
+            <h2 id="player_name"></h2>
+            <h3>Total Winnings: <span id="player_total">$0.00</span></h3>
+            <div class="column">
+              <table id="history_table">
+                <tr>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Amount</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Player list view - shows all players and their total winnings -->
+          <div id="player_list" style="display:none">
+            <div class="column">
+              <table id="winnings_table">
+                <tr>
+                  <th>Player</th>
+                  <th>Total Winnings</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- Loading state -->
+          <div id="loading">
+            Loading...
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="links"></div>
+      <a
+        class="btn--remix"
+        target="_top"
+        href="/"
+      >
+        Home
+      </a>
+    </footer>
+  </body>
+</html>
